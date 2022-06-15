@@ -28,7 +28,7 @@ To deploy this app, build the jar first and then run using java cmd or via docke
 
       FROM openjdk:17.0.1-jdk
       ARG JAR_FILE=build/libs/otp-gen-0.0.1-SNAPSHOT.jar
-      ARG TEXTLOCAL_API_KEY=<database url>
+      ARG TEXTLOCAL_API_KEY=<API key for TextLocal messaging service>
       COPY ${JAR_FILE} app.jar
       ENTRYPOINT ["java","-jar","/app.jar"]
 
