@@ -54,17 +54,18 @@ public class OTPController {
 
         var otp = otpGen.gen6DigitOTP();
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(Constants.TEXT_LOCAL_SEND_SMS_URL)
-                .queryParam("apikey", envConstants.getTextLocalApiKey())
-                .queryParam("message", Constants.OTP_MESSAGE + otp + ".")
-                .queryParam("sender", Constants.SMS_SENDER)
-                .queryParam("numbers", "91" + requestBody.getPhonenumber());
-        
-        var sendResponse = restTemplate.getForEntity(
-                builder.toUriString(),
-                TextLocalResponse.class);
-
-        log.info("Sent SMS to " + requestBody.getPhonenumber() + " . Details: " + sendResponse.toString());
+        //todo uncomment after textlocal or other SMS service template is approved and functional
+//        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(Constants.TEXT_LOCAL_SEND_SMS_URL)
+//                .queryParam("apikey", envConstants.getTextLocalApiKey())
+//                .queryParam("message", Constants.OTP_MESSAGE + otp + ".")
+//                .queryParam("sender", Constants.SMS_SENDER)
+//                .queryParam("numbers", "91" + requestBody.getPhonenumber());
+//
+//        var sendResponse = restTemplate.getForEntity(
+//                builder.toUriString(),
+//                TextLocalResponse.class);
+//
+//        log.info("Sent SMS to " + requestBody.getPhonenumber() + " . Details: " + sendResponse.toString());
 
         return ResponseEntity.ok(
                 Map.of(
