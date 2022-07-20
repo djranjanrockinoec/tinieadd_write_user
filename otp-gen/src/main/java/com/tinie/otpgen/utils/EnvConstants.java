@@ -9,4 +9,7 @@ import org.springframework.stereotype.Component;
 @Data
 public class EnvConstants {
     private String textLocalApiKey;
+    private String whatsappTemplateName;
+    private String whatsappAuthKey;
+    private String whatsappMessageUrl;
 }

@@ -1,6 +1,5 @@
-package com.tinie.otpgen.domain;
+package com.tinie.otpgen.exceptions;
 
-import com.tinie.otpgen.exceptions.SMSFailedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +19,20 @@ public class ExceptionAdvice {
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     public ResponseEntity<?> registerUserHandler(SMSFailedException e){
         return ResponseEntity.badRequest().body(
+                Map.of("phonenumber", e.getPhoneNumber(),
+                        "messagestatus", e.getMessage())
+        );
+    }
+
+    /**
+     * Handle thrown {@link OTPSendFailedException} and return a {@link ResponseEntity} with status code of {@literal 500}
+     * @param e Instance of {@link OTPSendFailedException} thrown
+     * @return Instance of {@link ResponseEntity} containing {@literal phonenumber} and {@literal action}
+     */
+    @ExceptionHandler(value = OTPSendFailedException.class)
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<?> OTPSendFailed(OTPSendFailedException e){
+        return ResponseEntity.internalServerError().body(
                 Map.of("phonenumber", e.getPhoneNumber(),
                         "messagestatus", e.getMessage())
         );
